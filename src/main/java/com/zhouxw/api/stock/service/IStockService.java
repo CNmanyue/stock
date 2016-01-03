@@ -1,4 +1,4 @@
-package cn.my.mvnweb.api.service;
+package com.zhouxw.api.stock.service;
 
 /**
  * @author Mocuishle

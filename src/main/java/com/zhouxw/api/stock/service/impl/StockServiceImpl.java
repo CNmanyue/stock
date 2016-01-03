@@ -1,9 +1,9 @@
-package cn.my.mvnweb.api.service.impl;
+package com.zhouxw.api.stock.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.my.mvnweb.api.service.IStockService;
-import cn.my.mvnweb.api.utils.ApiClient;
+import com.zhouxw.api.stock.service.IStockService;
+import com.zhouxw.api.utils.ApiClient;
 
 /**
  * @author Mocuishle

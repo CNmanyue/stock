@@ -1,4 +1,4 @@
-package cn.my.mvnweb.api.utils;
+package com.zhouxw.api.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
