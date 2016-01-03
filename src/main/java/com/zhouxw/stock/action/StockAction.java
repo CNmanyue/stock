@@ -1,4 +1,7 @@
-package com.zhouxw.api.stock.action;
+package com.zhouxw.stock.action;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
@@ -6,7 +9,9 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import com.zhouxw.api.stock.service.IStockService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.zhouxw.stock.service.IStockService;
 
 /**
  * @author Mocuishle
@@ -22,9 +27,9 @@ public class StockAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(StockAction.class);
 	
 	// 页码
-	private int page;
+//	private int page;
 	// 每页返回条数,1(20条默认),2(40条),3(60条),4(80条)
-	private int pageSize;
+//	private int pageSize;
 	// 股票编号，上海股市以sh开头，深圳股市以sz开头如：sh601009（type为0或者1时gid不是必须）
 	private String gid;
 	
@@ -33,9 +38,14 @@ public class StockAction extends BaseAction {
 	
 	@Action(value="szallStock")
 	public void szallStock(){
-		String response = stockService.querySzAllStock(page,pageSize);
-		super.writeJson(response);
-		logger.info(">>>over.");
+		JSONObject obj = stockService.querySzAllStock(super.getPage(),super.getType());
+		JSONObject result = obj.getJSONObject("result");
+		Map<String, Object> m = new HashMap<String, Object>();
+		int total = result.getIntValue("totalCount");
+		JSONArray data = result.getJSONArray("data");
+		m.put("total", total);
+		m.put("rows", data);
+		super.writeJson(m);
 	}
 
 	public static Logger getLogger() {
@@ -44,14 +54,6 @@ public class StockAction extends BaseAction {
 
 	public static void setLogger(Logger logger) {
 		StockAction.logger = logger;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
 	}
 
 	public String getGid() {
@@ -64,14 +66,6 @@ public class StockAction extends BaseAction {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	public IStockService getStockService() {

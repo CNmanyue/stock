@@ -1,4 +1,4 @@
-package com.zhouxw.api.utils;
+package com.zhouxw.utils;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;

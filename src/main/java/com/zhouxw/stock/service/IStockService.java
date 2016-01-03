@@ -1,4 +1,6 @@
-package com.zhouxw.api.stock.service;
+package com.zhouxw.stock.service;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author Mocuishle
@@ -21,5 +23,5 @@ public interface IStockService {
 	 * @param type	每页返回条数,1(20条默认),2(40条),3(60条),4(80条)
 	 * @return
 	 */
-	public String querySzAllStock(int page,int type);
+	public JSONObject querySzAllStock(int page,int type);
 }

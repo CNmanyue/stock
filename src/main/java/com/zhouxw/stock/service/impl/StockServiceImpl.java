@@ -1,4 +1,4 @@
-package com.zhouxw.api.stock.service.impl;
+package com.zhouxw.stock.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,13 +6,18 @@ import java.util.Map;
 
 
 
+
+
+
+
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zhouxw.api.stock.service.IStockService;
-import com.zhouxw.api.utils.BaiduApiClient;
-import com.zhouxw.api.utils.JuheApiClient;
+import com.zhouxw.stock.service.IStockService;
+import com.zhouxw.utils.request.BaiduApiClient;
+import com.zhouxw.utils.request.JuheApiClient;
 
 /**
  * @author Mocuishle
@@ -22,17 +27,20 @@ import com.zhouxw.api.utils.JuheApiClient;
 @Scope(value="singleton")
 public class StockServiceImpl implements IStockService{
 
-	private String httpUrl = "http://apis.baidu.com/apistore/stockservice/stock";
+	private static Logger logger = Logger.getLogger(StockServiceImpl.class);
+	
+	private static String HTTPURL = "http://apis.baidu.com/apistore/stockservice/stock";
+	
 	private static String SZALL_URL = "http://web.juhe.cn:8080/finance/stock/szall";
 	private static String APPKEY = "d0a46d58359a5f6b92777c7064d81aac";
 	@Override
 	public String getStockInfo(String httpArg) {
 		httpArg = "stockid=sz002230&list=1";
-		return BaiduApiClient.request(httpUrl, httpArg);
+		return BaiduApiClient.request(HTTPURL, httpArg);
 	}
 
 	@Override
-	public String querySzAllStock(int page, int type) {
+	public JSONObject querySzAllStock(int page, int type) {
 		String result =null;
         Map<String, Object> params = new HashMap<String, Object>();//请求参数
             params.put("key",APPKEY);//APP Key
@@ -42,21 +50,11 @@ public class StockServiceImpl implements IStockService{
             result =JuheApiClient.net(SZALL_URL, params, "GET");
             JSONObject object = JSONObject.parseObject(result);
             if(object.getIntValue("error_code")==0){
-                System.out.println(object.get("result"));
-                return result;
+                return object;
             }else{
-                result = object.get("error_code")+":"+object.get("reason");
-            	System.out.println(result);
-                return result;
+            	logger.error(object.get("error_code")+":"+object.get("reason"));
+                return object;
             }
 	}
-	public String getHttpUrl() {
-		return httpUrl;
-	}
-
-	public void setHttpUrl(String httpUrl) {
-		this.httpUrl = httpUrl;
-	}
-
 
 }
