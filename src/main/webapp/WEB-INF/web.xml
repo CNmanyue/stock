@@ -6,11 +6,7 @@
 	<display-name>stock</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<!-- spring配置文件位置 -->
 	<context-param>
@@ -22,30 +18,15 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!-- 显示java进程的内存信息 -->
-	<listener>
-		<listener-class>my.listener.PrintCacheListener</listener-class>
-	</listener>
-	<!-- 显示请求者信息 -->
-	<listener>
-		<listener-class>my.listener.PrintRequestListener</listener-class>
-	</listener>
-  <servlet>
-    <servlet-name>TestLogServlet</servlet-name>
-    <servlet-class>my.servlet.TestLogServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>PrintIpAddrServlet</servlet-name>
-    <servlet-class>my.servlet.PrintIpAddrServlet</servlet-class>
-  </servlet>
+	
+	<!-- Struts2核心过滤器 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 
-
-  <servlet-mapping>
-    <servlet-name>TestLogServlet</servlet-name>
-    <url-pattern>/servlet/TestLogServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>PrintIpAddrServlet</servlet-name>
-    <url-pattern>/servlet/PrintIpAddrServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
