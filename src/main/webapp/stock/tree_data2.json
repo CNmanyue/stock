@@ -1,0 +1,18 @@
+[{
+	"id":1,
+	"text":"系统功能",
+	"children":[{
+		"id":11,
+		"text":"自选股",
+		"state":"closed",
+		"children":[{
+			"id":111,
+			"text":"Friend",
+			"attributes":{"url":"www.baidu.com"}
+		}]
+	},{
+		"id":13,
+		"text":"股票详情",
+		"attributes":{"url":"./stock/query.jsp"}
+	}]
+}]
