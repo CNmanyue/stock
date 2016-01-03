@@ -39,6 +39,9 @@ public class BaseAction extends ActionSupport {
 	 * @return 每页数据量
 	 */
 	public int getType(){
+		if(rows==null){
+			return 1;
+		}
 		if(rows==40){
 			return 2;
 		}else if(rows==60){
