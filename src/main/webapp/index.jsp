@@ -23,10 +23,10 @@
 <body>
 	<h1>Welcome to zhouxw.com/api</h1>
 	<h2>ip：${pageContext.request.remoteHost}</h2>
-	<table>
-		<tr>
-			<td><a href="${pageContext.request.contextPath}/stock/home.jsp">股票监控系统</a></td>
-		</tr>
-	</table>
+	
+    <ul>
+    	<li><a href="${pageContext.request.contextPath}/stock/home.jsp">股票监控系统</a></li>
+    	<li><a href="${pageContext.request.contextPath}/wow/index.html">可爱的程序员</a></li>
+    </ul>
 </body>
 </html>
